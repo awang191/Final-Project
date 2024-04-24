@@ -1,0 +1,11 @@
+#Install chatbot AI
+pip install chatbotAI
+#create a dictionary of terms
+my_information = {'NHS': 'National Institutes of Health, a major biomedical insitution in the US that conducts and funds research to improve public health', 'CDC':'Centers for Disease Control and Prevention','SPH':'School of Public Health', 'Epidemiology': 'The study of what causes a disease outcome and the population distribution of the outcome'}
+
+#create a dictionary that replaces acronyms for more simplification of language 
+acronyms={'NHS':'National Institutes of Health', 'CDC':'Centers for Disease Control and Prevention','SPH': 'School of Public Health','ADR':'Adverse Drug Reaction', 'ADHD':'Attention Deficit Hyperactivity Disorder','AIDS':'Acquired Immune Deficiency Syndrome','APHA':'American Public Health Association','CBO':'Community-Based Organization','CHIP':'Children Health Insurance Program','EBP':'Evidence-Based Practice','EHR':'Electronic Health Record','EMS':'Emergency Medical Services','FDA':'Food and Drug Administration','FEMA':'US Federal Emergency Management Agency','FFS':'Fee for Service','FPL':'Federal Poverty Level','FQHC':'Federally Qualified Health Center','GIS':'Geographic Information System','HIPAA':'Health Insurance Portability and Accountability Act'}
+print(my_information)
+
+#check data type
+print(type(my_information))
