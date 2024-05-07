@@ -7,3 +7,25 @@ print(public_health_dict)
 #check data type
 print(type(public_health_dict))
 
+#language simplification (research transformers library, write code, and debug code) 2 hours
+from transformers import pipeline
+def simplify_text(text):
+    # Using a text simplification model
+    simplifier = pipeline("text2text-generation", model="t5-base", task="text2text-generation")
+    return simplifier(text, max_length=100)[0]['generated_text']
+def replace_jargon(text, dictionary):
+    words = text.split()
+    simplified_words = []
+    for word in words:
+      #handle punctuation and case sensitivity
+      stripped_word=word.strip(",.!?") #this removes punctuation
+      lowercase_word=stripped_word.lower()#convert to lowercase to match dictionary input, allows for easy dictionary lookup
+      if lowercase_word in dictionary:
+        #replace word with the dictionary definition
+        #preserve the original capitalization
+        definition=dictionary[lowercase_word]
+        if stripped_word[0].isupper():
+          definition=definition.capitalize() #capitalize the first letter if the original was capitalized
+        word=word.replace(stripped_word,definition)
+      simplified_words.append(word)
+    return ' '.join(simplified_words)
