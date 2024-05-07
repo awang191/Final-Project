@@ -7,7 +7,7 @@ print(public_health_dict)
 #check data type
 print(type(public_health_dict))
 
-#language simplification (research transformers library, write code, and debug code) 2 hours
+#language simplification (research transformers library, write code, and debug code) 2.5 hours
 from transformers import pipeline
 def simplify_text(text):
     # Using a text simplification model
