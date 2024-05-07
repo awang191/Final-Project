@@ -29,3 +29,18 @@ def replace_jargon(text, dictionary):
         word=word.replace(stripped_word,definition)
       simplified_words.append(word)
     return ' '.join(simplified_words)
+    #test text
+def replace_jargon(text, dictionary):
+    words = text.split()
+    simplified_words = []
+    for word in words:
+        # handling punctuation and case sensitivity
+        clean_word = word.strip(",.!?").lower()
+        if clean_word in dictionary:
+            # replace and keep the original punctuation
+            word = dictionary[clean_word] + word[len(clean_word):]
+        simplified_words.append(word)
+    return ' '.join(simplified_words)
+test_text = "In epidemiology, the incidence of the disease was noted to be rising, which was significant as the p-value was below 0.05, according to WHO standards."
+simplified_text = replace_jargon(test_text, public_health_dict)
+simplified_text
