@@ -77,16 +77,17 @@ print(remove_term("Mortality"))
 print(get_definition("Epidemiology"))
 
 #Updating to be even more advanced by implementing tokenizing (split text into words or sentences), POS tagging (part of speech tagging, like noun, verb, adjective, etc.), and stop words removal (the, is, at) that do not contribute much meaning to a sentence 
-#12 hours debugging, coding, and researching NLTK functions 
+#15 hours debugging, coding, and researching NLTK functions 
 
 #import NLTK resources
 import nltk
 from nltk.tokenize import word_tokenize, sent_tokenize 
 from nltk.corpus import stopwords 
 from nltk import pos_tag 
+import string 
 
 nltk.download ('punkt') #tokenizer model 
-nltk.download('averaged_perceptron_tagger') #POS tagger
+nltk.download('averaged_perceptron_tagger') #Part of Speech tagger
 nltk.download('stopwords') #stopwords
 
 #alternative text simplification function that is more advanced with NLTK features
@@ -101,6 +102,11 @@ def simplify_text_with_nltk(text):
 
     #remove stopwords 
     stop_words=set(stopwords.words('english'))
+    #remove 'and' and 'are' from stopwords to keep it in the text
+    stop_words.discard('and')
+    stop_words.discard('are')
+
+    #filter words to handle stopwords more selectively 
     filtered_words=[word for word in words if word.lower() not in stop_words]
 
     #pos tagging 
@@ -109,10 +115,16 @@ def simplify_text_with_nltk(text):
     #replace complex words based on dictionary 
    simplified_words=[]
     for word, tag in tagged_words:
-      #append space if last character is not a punctuation 
-      if simplified_words and not simplified_words[-1].endswith((' ', '.', ',', '!', '?', ':', ';')):
-                simplified_words.append(' ')
-      simplified_words.append(public_health_dict.get(word, word))
+      if word in string.punctuation:
+                if simplified_words and not simplified_words[-1].endswith(' '):
+                    simplified_words.append(word)
+                else:
+                    simplified_words.append(word)
+            else:
+                if simplified_words and not simplified_words[-1].endswith((' ', '.', ',', '!', '?', ':', ';')):
+                    simplified_words.append(' ')
+                simplified_words.append(public_health_dict.get(word, word))
+                
     #reconstruct simplified sentence 
     simplified_sentence=''.join(simplified_words)
     simplified_sentences.append(simplified_sentence)
@@ -121,5 +133,5 @@ def simplify_text_with_nltk(text):
   return''.join(simplified_sentences)
 
 # Example usage 
-example_text = "Epidemiology and Morbidity are key concepts in public health studies."
+example_text = "Epidemiology and morbidity are key concepts in public health studies."
 print(simplify_text_with_nltk(example_text))
