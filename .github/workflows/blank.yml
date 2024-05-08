@@ -44,3 +44,34 @@ def replace_jargon(text, dictionary):
 test_text = "In epidemiology, the incidence of the disease was noted to be rising, which was significant as the p-value was below 0.05, according to WHO standards."
 simplified_text = replace_jargon(test_text, public_health_dict)
 simplified_text
+
+#debug spacing error 2 hours 
+#Research ideas on how to facilitate greater user interaction, code adding and updating terms, removing terms, getting definition of term to promote user interaction, debugging  
+#3 hours
+def add_or_update_term(term, definition):
+    if term in public_health_dictionary:
+        action = "updated"
+    else:
+        action = "added"
+    public_health_dictionary[term] = definition
+    return f"Term '{term}' {action} successfully."
+
+# Example 
+print(add_or_update_term("Biostatistics", "The application of statistics to a wide range of topics in biology."))
+print(add_or_update_term("Epidemiology", "The science that studies the patterns, causes, and effects of health and disease conditions in defined populations."))
+
+# function to remove a term from the dictionary
+def remove_term(term):
+    if term in public_health_dictionary:
+        del public_health_dictionary[term]
+        return f"Term '{term}' removed successfully."
+    else:
+        return f"Term '{term}' not found."
+
+# function to get the definition of a term
+def get_definition(term):
+    return public_health_dictionary.get(term, "Term not found.")
+
+#Examples 
+print(remove_term("Mortality"))
+print(get_definition("Epidemiology"))
