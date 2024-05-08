@@ -238,3 +238,48 @@ def simplify_text_with_nltk(text):
 # Example usage 
 example_text = "Epidemiology and morbidity are key concepts in public health studies."
 print(simplify_text_with_nltk(example_text))
+
+#2 hours coding and debugging, again to address the spacing issue from before 
+#alter who to differ between WHO, the World Health Organization, versus the pronoun "who"
+def refine_who(text):
+  sentences=sent_tokenize(text)
+  refined_text=[]
+
+  for sentence in sentences:
+        words = word_tokenize(sentence)
+        tagged_words = pos_tag(words)
+
+        new_sentence = []
+        for i, (word, tag) in enumerate(tagged_words):
+            # check if the current word is 'who' 
+            if word.lower() == 'who':
+                if tag == 'WP':
+                    # if who is a pronoun, append as a pronoun and ensure proper spacing
+                    if new_sentence and new_sentence[-1] not in string.punctuation:
+                        new_sentence.append(' ')
+                    new_sentence.append(word)
+                else:
+                    # if who is an acronym, apend 'World Health Organization', ensure proper spacing
+                    if new_sentence and new_sentence[-1] not in string.punctuation:
+                        new_sentence.append(' ')
+                    new_sentence.append("World Health Organization")
+            else:
+                # handle normal words and punctuation
+                if word in string.punctuation:
+                    # append punctuation directly without a preceding space
+                    new_sentence.append(word)
+                else:
+                    # append words with a space if not the start of the sentence
+                    if new_sentence and new_sentence[-1] not in string.punctuation:
+                        new_sentence.append(' ')
+                    new_sentence.append(word)
+
+# join the words to form the final sentence
+        refined_sentence = ''.join(new_sentence)
+        refined_text.append(refined_sentence)
+
+  return ' '.join(refined_text)
+
+#Test case 
+text="Who is leading the WHO? Who is a part of the WHO?"
+print(refine_who(text))
