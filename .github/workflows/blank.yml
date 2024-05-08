@@ -107,12 +107,16 @@ def simplify_text_with_nltk(text):
     tagged_words=pos_tag(filtered_words)
 
     #replace complex words based on dictionary 
-    simplified_words=[public_health_dict.get(word, word) for word, tag in tagged_words]
-
+   simplified_words=[]
+    for word, tag in tagged_words:
+      #append space if last character is not a punctuation 
+      if simplified_words and not simplified_words[-1].endswith((' ', '.', ',', '!', '?', ':', ';')):
+                simplified_words.append(' ')
+      simplified_words.append(public_health_dict.get(word, word))
     #reconstruct simplified sentence 
     simplified_sentence=''.join(simplified_words)
     simplified_sentences.append(simplified_sentence)
-
+    
   #reconstruct simplified text using sentences 
   return''.join(simplified_sentences)
 
