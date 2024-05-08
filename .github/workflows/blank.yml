@@ -75,3 +75,47 @@ def get_definition(term):
 #Examples 
 print(remove_term("Mortality"))
 print(get_definition("Epidemiology"))
+
+#Updating to be even more advanced by implementing tokenizing (split text into words or sentences), POS tagging (part of speech tagging, like noun, verb, adjective, etc.), and stop words removal (the, is, at) that do not contribute much meaning to a sentence 
+#10 hours debugging, coding, and researching NLTK functions 
+#*STILL HAVE MORE TO DEBUG*
+#import NLTK resources
+import nltk
+from nltk.tokenize import word_tokenize, sent_tokenize 
+from nltk.corpus import stopwords 
+from nltk import pos_tag 
+
+nltk.download ('punkt') #tokenizer model 
+nltk.download('averaged_perceptron_tagger') #POS tagger
+nltk.download('stopwords') #stopwords
+
+#alternative text simplification function that is more advanced with NLTK features
+def simplify_text_with_nltk(text):
+  sentences=sent_tokenize(text)
+  simplified_sentences=[]
+
+  #process each sentence 
+  for sentence in sentences: 
+    #tokenize the sentence into words 
+    words=word_tokenize(sentence)
+
+    #remove stopwords 
+    stop_words=set(stopwords.words('english'))
+    filtered_words=[word for word in words if word.lower() not in stop_words]
+
+    #pos tagging 
+    tagged_words=pos_tag(filtered_words)
+
+    #replace complex words based on dictionary 
+    simplified_words=[public_health_dict.get(word, word) for word, tag in tagged_words]
+
+    #reconstruct simplified sentence 
+    simplified_sentence=''.join(simplified_words)
+    simplified_sentences.append(simplified_sentence)
+
+  #reconstruct simplified text using sentences 
+  return''.join(simplified_sentences)
+
+# Example usage 
+example_text = "Epidemiology and Morbidity are key concepts in public health studies."
+print(simplify_text_with_nltk(example_text))
