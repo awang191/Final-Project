@@ -283,3 +283,50 @@ def refine_who(text):
 #Test case 
 text="Who is leading the WHO? Who is a part of the WHO?"
 print(refine_who(text))
+
+#differentiate between "AIDS" (disease) and "aids" (assistance)
+#2 hours coding and debugging spacing & punctuation issues 
+def refine_aids(text):
+  sentences=sent_tokenize(text)
+  refined_text=[]
+
+  for sentence in sentences: 
+    words=word_tokenize(sentence)
+    tagged_words=pos_tag(words)
+
+    new_sentence = []
+    for i, (word, tag) in enumerate(tagged_words):
+            if word.lower() == 'aids':
+                if tag == 'NNP': #NPP means proper noun
+                    # append as proper noun, ensure proper spacing
+                    if new_sentence and new_sentence[-1] not in string.punctuation:
+                        new_sentence.append(' ')
+                    new_sentence.append("Acquired Immune Deficiency Syndrome")
+                else:
+                    # append as aids meaning assistance, ensure proper spacing
+                    if new_sentence and new_sentence[-1] not in string.punctuation:
+                        new_sentence.append(' ')
+                    new_sentence.append("assists") #replace aids with synonym 'assists' to decrease confusion 
+            else:
+                # handle normal words and punctuation
+                if word in string.punctuation:
+                    # append punctuation directly without a preceding space
+                    new_sentence.append(word)
+                else:
+                    # Append words with a space if it's not the start of the sentence
+                    if new_sentence and new_sentence[-1] not in string.punctuation:
+                        new_sentence.append(' ')
+                    new_sentence.append(word)
+
+
+       # Join the words to form the final sentence
+    refined_sentence = ''.join(new_sentence)
+    refined_text.append(refined_sentence)
+
+  return ' '.join(refined_text)
+
+#test case
+text="He aids people in rural areas who have AIDS."
+print(refine_aids(text))
+#Output: He assists people in rural areas who have Acquired Immune Deficiency Syndrome.
+
