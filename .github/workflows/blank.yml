@@ -77,8 +77,8 @@ print(remove_term("Mortality"))
 print(get_definition("Epidemiology"))
 
 #Updating to be even more advanced by implementing tokenizing (split text into words or sentences), POS tagging (part of speech tagging, like noun, verb, adjective, etc.), and stop words removal (the, is, at) that do not contribute much meaning to a sentence 
-#10 hours debugging, coding, and researching NLTK functions 
-#*STILL HAVE MORE TO DEBUG*
+#12 hours debugging, coding, and researching NLTK functions 
+
 #import NLTK resources
 import nltk
 from nltk.tokenize import word_tokenize, sent_tokenize 
