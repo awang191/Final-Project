@@ -123,7 +123,7 @@ public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical 
 'waste management':'actions required to manage waste from its inception to its final disposal',
 'mortality':'death',
 'exacerbate':'worsen',
-'co-morbid':'simultaneously present',
+'co-morbid':'simultaneously occurring',
 'epidemiological':'relating to diseases',
 'intersectionality':'interconnected nature'}
 
