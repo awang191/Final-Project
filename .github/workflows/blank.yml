@@ -1,11 +1,11 @@
-#12 hours to create dictionary (researching terms, creating definitions, and typing them out)
+#13 hours to create dictionary (researching terms, creating definitions, and typing them out)
 #create a dictionary of terms
 public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical insitution in the US that conducts and funds research to improve public health',
 'cdc':'Centers for Disease Control and Prevention',
 'sph':'School of Public Health',
 'epidemiology': 'the study of what causes a disease outcome and the population distribution of the outcome',
 'incidence':'the number of new cases of a disease',
-'prevalence':'the total number of causes of a disease at a given time',
+'prevalence':'the total amount present',
 'p-value':'statistic that shows if the study results are significant and did not occur due to random chance',
 'adr':'Adverse Drug Reaction', 'adhd':'Attention Deficit Hyperactivity Disorder',
 'aids':'Acquired Immune Deficiency Syndrome',
@@ -121,8 +121,11 @@ public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical 
 'vector control':'methods to limit or eradicate mammals, birds, or insects that transmit disease',
 'viral load':'the number of virus particles in a sample of an organism',
 'waste management':'actions required to manage waste from its inception to its final disposal'}
-
-}
+'mortality':'death',
+'exacerbate':'worsen',
+'co-morbid':'simultaneously present',
+'epidemiological':'diseases',
+'intersectionality':'interconnected nature'}
 
 print(public_health_dict)
 
@@ -347,3 +350,54 @@ text="He aids people in rural areas who have AIDS."
 print(refine_aids(text))
 #Output: He assists people in rural areas who have Acquired Immune Deficiency Syndrome.
 
+#11 hours: Research different models (Bart, GPT, Transformers) to implement, experiment with each to see which is best 
+#Debug language output error (the output was giving the simplified text in the wrong language, like German or French, or sometimes half of the output was in English and the other half was in French)
+#Fine tune the output to be even more simplified by ensuring dictionary definitions are not too superfluous 
+
+from transformers import BartForConditionalGeneration, BartTokenizer
+
+def load_model_and_tokenizer(model_name='facebook/bart-large-cnn'):
+    """
+    Loads the BART model and tokenizer.
+    """
+    tokenizer = BartTokenizer.from_pretrained(model_name)
+    model = BartForConditionalGeneration.from_pretrained(model_name)
+    return model, tokenizer
+
+def replace_terms_with_definitions(text, dictionary):
+    """
+    Replaces terms in the text with their definitions from the dictionary.
+    """
+    words = text.split()
+    new_words = []
+    for word in words:
+        key = word.lower().strip(",.!?")
+        if key in dictionary:
+            new_words.append(dictionary[key] + " (" + word + ")")
+        else:
+            new_words.append(word)
+    return ' '.join(new_words)
+
+def simplify_text(text, model, tokenizer):
+    """
+    Simplifies text using the BART model.
+    """
+    # Replace complex terms with definitions before simplification
+    text_with_definitions = replace_terms_with_definitions(text, public_health_dict)
+    inputs = tokenizer.encode("simplify: " + text_with_definitions, return_tensors="pt", max_length=1024, truncation=True)
+    summary_ids = model.generate(inputs, max_length=200, min_length=40, length_penalty=2.0, num_beams=4, early_stopping=True)
+    simplified_text = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+    return simplified_text
+
+def main():
+    """
+    Main function to execute the script.
+    """
+    model, tokenizer = load_model_and_tokenizer()
+    original_text = "In the context of an ongoing global health crisis, epidemiological studies consistently demonstrate that the prevalence of co-morbid conditions such as hypertension, diabetes mellitus, and chronic respiratory diseases significantly exacerbate the morbidity and mortality rates associated with the novel coronavirus, thereby underscoring the imperative necessity for targeted public health interventions aimed at these underlying health disparities. Furthermore, the intersectionality of socio-economic factors and access to healthcare services plays a pivotal role in influencing the epidemiological outcomes and necessitates the formulation of multi-faceted public health strategies designed to alleviate the disproportionate impact on marginalized communities."
+    print("Original Text:", original_text)
+    simplified_text = simplify_text(original_text, model, tokenizer)
+    print("Simplified Text:", simplified_text)
+
+if __name__ == '__main__':
+    main()
