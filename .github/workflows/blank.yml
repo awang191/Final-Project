@@ -405,7 +405,7 @@ def main():
     #load model and tokenizer
     model, tokenizer = load_model_and_tokenizer()
     #provide original text
-    original_text = "In the context of an ongoing global health crisis, epidemiological studies consistently demonstrate that the prevalence of co-morbid conditions such as hypertension, diabetes mellitus, and chronic respiratory diseases significantly exacerbate the morbidity and mortality rates associated with the novel coronavirus, thereby underscoring the imperative necessity for targeted public health interventions aimed at these underlying health disparities. Furthermore, the intersectionality of socio-economic factors and access to healthcare services plays a pivotal role in influencing the epidemiological outcomes and necessitates the formulation of multi-faceted public health strategies designed to alleviate the disproportionate impact on marginalized communities."
+    original_text = "In the context of an ongoing global health crisis, epidemiological studies consistently demonstrate that the prevalence of co-morbid conditions such as hypertension, diabetes mellitus, and chronic respiratory diseases significantly exacerbate the morbidity and mortality rates associated with the novel coronavirus."
     print("Original Text:", original_text)
     #generate and print simplified text 
     simplified_text = simplify_text(original_text, model, tokenizer)
