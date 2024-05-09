@@ -61,7 +61,7 @@ public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical 
 'pfizer':'COVID-19 vaccine', 
 'moderna':'COVID-19 vaccine',
 'biostatistics':'the science of using mathematical methods to analyze health data',
-'morbidity':'the presence of disease, illness of health impairments in a population',
+'morbidity':'the presence of disease',
 'randomized control trial':'a study in which people are randomly assigned to a group to receive different treatments, used to measure the effectiveness of medical interventions',
 'placebo':'a harmless pill, medicine, or procedure that gives a psychological perception of change rather than a physiological effect',
 'meta-analysis':'a statistical technique that combines results of multiple scientific studies',
