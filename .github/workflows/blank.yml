@@ -1,6 +1,6 @@
 #13 hours to create dictionary (researching terms, creating straightforward definitions, and typing them out)
 #create a dictionary of terms
-public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical insitution in the US that conducts and funds research to improve public health',
+public_health_dict = {'nih': 'National Institutes of Health, a major biomedical insitution in the US that conducts and funds research to improve public health',
 'cdc':'Centers for Disease Control and Prevention',
 'sph':'School of Public Health',
 'epidemiology': 'the study of what causes a disease outcome and the population distribution of the outcome',
