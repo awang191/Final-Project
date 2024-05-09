@@ -1,4 +1,4 @@
-#Time to create dictionary (researching terms, creating definitions, and typing them out): 12 hours 
+#12 hours to create dictionary (researching terms, creating definitions, and typing them out)
 #create a dictionary of terms
 public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical insitution in the US that conducts and funds research to improve public health',
 'cdc':'Centers for Disease Control and Prevention',
@@ -129,7 +129,7 @@ print(public_health_dict)
 #check data type
 print(type(public_health_dict))
 
-#language simplification (research transformers library, write code, and debug code) 2.5 hours
+#2.5 hours to create language simplification (research transformers library, write code, and debug code) 
 from transformers import pipeline
 def simplify_text(text):
     # Using a text simplification model
@@ -199,7 +199,7 @@ print(remove_term("Mortality"))
 print(get_definition("Epidemiology"))
 
 #Updating to be even more advanced by implementing tokenizing (split text into words or sentences), POS tagging (part of speech tagging, like noun, verb, adjective, etc.), and stop words removal (the, is, at) that do not contribute much meaning to a sentence 
-#15 hours debugging, coding, and researching NLTK functions 
+#19 hours debugging, coding, and researching NLTK functions 
 
 #import NLTK resources
 import nltk
@@ -258,7 +258,6 @@ def simplify_text_with_nltk(text):
 example_text = "Epidemiology and morbidity are key concepts in public health studies."
 print(simplify_text_with_nltk(example_text))
 
-#2 hours coding and debugging, again to address the spacing issue from before 
 #alter who to differ between WHO, the World Health Organization, versus the pronoun "who"
 def refine_who(text):
   sentences=sent_tokenize(text)
@@ -304,7 +303,6 @@ text="Who is leading the WHO? Who is a part of the WHO?"
 print(refine_who(text))
 
 #differentiate between "AIDS" (disease) and "aids" (assistance)
-#2 hours coding and debugging spacing & punctuation issues 
 def refine_aids(text):
   sentences=sent_tokenize(text)
   refined_text=[]
