@@ -353,6 +353,7 @@ print(refine_aids(text))
 #11 hours: Research different models (Bart, GPT, Transformers) to implement, experiment with each to see which is best 
 #Debug language output error (the output was giving the simplified text in the wrong language, like German or French, or sometimes half of the output was in English and the other half was in French)
 #Fine tune the output to be even more simplified by ensuring dictionary definitions are not too superfluous 
+#Experiment by trial and error with the practice text to fine tune output 
 
 from transformers import BartForConditionalGeneration, BartTokenizer
 
