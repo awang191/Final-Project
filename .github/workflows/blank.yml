@@ -175,8 +175,8 @@ def add_or_update_term(term, definition):
     return f"Term '{term}' {action} successfully."
 
 # Example 
-print(add_or_update_term("Biostatistics", "The application of statistics to a wide range of topics in biology."))
-print(add_or_update_term("Epidemiology", "The science that studies the patterns, causes, and effects of health and disease conditions in defined populations."))
+print(add_or_update_term("Biostatistics", "The application of statistics to a wide range of topics in biology"))
+print(add_or_update_term("Epidemiology", "The science that studies the patterns, causes, and effects of health and disease conditions in defined populations"))
 
 # function to remove a term from the dictionary
 def remove_term(term):
@@ -197,7 +197,7 @@ print(get_definition("Epidemiology"))
 #output: Term 'Biostatistics' added successfully.
 #Term 'Epidemiology' added successfully.
 #Term 'Mortality' not found.
-#The science that studies the patterns, causes, and effects of health and disease conditions in defined populations.
+#The science that studies the patterns, causes, and effects of health and disease conditions in defined populations
 
 #Updating to be even more advanced by implementing tokenizing (split text into words or sentences), POS tagging (part of speech tagging, like noun, verb, adjective, etc.), and stop words removal (the, is, at) that do not contribute much meaning to a sentence 
 #19 hours debugging, coding, and researching NLTK functions 
