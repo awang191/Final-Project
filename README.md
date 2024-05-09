@@ -5,7 +5,7 @@ Public Health Dictionary & Language Simplification
 INSTALL: 
 1. 'transformers' library by Hugging Face (BartForConditionalGeneration, BartTokenizer, pipeline)
 2. 'nltk' Natural Language Toolkit (nltk.corpus, nltk.tokenize) 
-4. string module 
+4. 'string' module 
 
 No external datasets are required as the data is already embedded as code within the Python dictionary. 
 
