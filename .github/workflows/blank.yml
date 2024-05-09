@@ -5,7 +5,7 @@ public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical 
 'sph':'School of Public Health',
 'epidemiology': 'the study of what causes a disease outcome and the population distribution of the outcome',
 'incidence':'the number of new cases of a disease',
-'prevalence':'the total amount present',
+'prevalence':'the total presence',
 'p-value':'statistic that shows if the study results are significant and did not occur due to random chance',
 'adr':'Adverse Drug Reaction', 'adhd':'Attention Deficit Hyperactivity Disorder',
 'aids':'Acquired Immune Deficiency Syndrome',
