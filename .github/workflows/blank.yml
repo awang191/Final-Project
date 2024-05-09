@@ -120,7 +120,7 @@ public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical 
 'vaccine hesitancy':'delay in acceptance or refusal of vaccines despite availability of vaccine services',
 'vector control':'methods to limit or eradicate mammals, birds, or insects that transmit disease',
 'viral load':'the number of virus particles in a sample of an organism',
-'waste management':'actions required to manage waste from its inception to its final disposal'
+'waste management':'actions required to manage waste from its inception to its final disposal',
 'mortality':'death',
 'exacerbate':'worsen',
 'co-morbid':'simultaneously present',
