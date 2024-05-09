@@ -1,4 +1,4 @@
-Public Health Dictionary & Language Simplification 
+Public Health Dictionary & Communications Simplification Device 
 1. Includes a comprehensive public health dictionary
 2. Includes a Python script for replacing complex jargon with simplified definitions to enhance readability for the general public
 
