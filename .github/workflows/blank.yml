@@ -1,4 +1,4 @@
-#Time to create dictionary (researching terms, creating definitions, and typing them out): 10 hours 
+#Time to create dictionary (researching terms, creating definitions, and typing them out): 12 hours 
 #create a dictionary of terms
 public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical insitution in the US that conducts and funds research to improve public health',
 'cdc':'Centers for Disease Control and Prevention',
@@ -102,7 +102,26 @@ public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical 
 'one health':'a collaborative, multi-discplinary approach that works locally, nationally, and globally to achieve optimal health outcomes recognizing the interconnection between people, animals, plants, and their shared environment',
 'health impact assessment':'a combination of procedures, methods, and tools by which a policy, program, or project may be judged as to its potential effects on the health of a population',
 'sentinel surveillance':'the use of selected institutions to monitor and report cases of a disease which provides an indication of the larger health status of the surrounding community',
-'universal health coverage':'ensuring that all people have access to needed health services including preveniton, promotion, treatment, rehabilitation, and palliation without suffering financial hardship when paying for them'
+'universal health coverage':'ensuring that all people have access to needed health services including preveniton, promotion, treatment, rehabilitation, and palliation without suffering financial hardship when paying for them',
+ 'global burden of disease':'comprehensive regional and global assessment of mortality and disability from major diseases, injuries, and risk factors',
+'mhealth':'use of mobile and wireless technologies to support the achievement of health objectives',
+'precision medicine':'an approach to patient care that allows doctors to select treatments that are most likely to help patients based on a genetic understanding of their disease',
+'secondary care':'health services provided by medical specialists and other health professionals who generally do not have first contact with patients, requiring a referral from primary care',
+'tertiary care':'specialized healthcare, usually for inpatients and on referral from a primary or secondary health professional, in a facility that has personnel and facilities for advanced medical treatment',
+'quarternary care':'extension of tertiary care with advanced levels of medicine which are highly specialized and not widely accessed',
+'cross-sectional study':'observational study that analyzes data from a population at a specific point in time',
+'prospective study':'an observational study in which participants are followed over time to observe their outcomes',
+'retrospective study':'a study that looks backwards in time and examines exposures to suspected risk or protectective factors in relation to an outcome that has been established at the start of the study',
+'socioeconomic status':'the social standing of a class of an individual, often measured by a combination of education, income, and occupation',
+'stakeholder engagement':'involvement of individuals, groups, or organizations who may be affected by a decision or can influence the outcome',
+'syndemic':'synergistic epidemic, two or more afflictions that interact synergistically which contributes to excess burden of disease in a population',
+'translational research':'using discoveries from research laboratories to apply to treating patients in healthcare settings',
+'undernutrition':'the result of insufficient food intake and repeated infectious diseases that causes being underweight, too short or stunted, too thin, or vitamin/mineral deficient',
+'vaccine hesitancy':'delay in acceptance or refusal of vaccines despite availability of vaccine services',
+'vector control':'methods to limit or eradicate mammals, birds, or insects that transmit disease',
+'viral load':'the number of virus particles in a sample of an organism',
+'waste management':'actions required to manage waste from its inception to its final disposal'}
+
 }
 
 print(public_health_dict)
