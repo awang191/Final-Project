@@ -1,4 +1,4 @@
-#13 hours to create dictionary (researching terms, creating definitions, and typing them out)
+#13 hours to create dictionary (researching terms, creating straightforward definitions, and typing them out)
 #create a dictionary of terms
 public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical insitution in the US that conducts and funds research to improve public health',
 'cdc':'Centers for Disease Control and Prevention',
@@ -135,14 +135,16 @@ print(type(public_health_dict))
 #2.5 hours to create language simplification (research transformers library, write code, and debug code) 
 from transformers import pipeline
 def simplify_text(text):
-    # Using a text simplification model
+    # Using a text simplification model. T5 understands context well. 
     simplifier = pipeline("text2text-generation", model="t5-base", task="text2text-generation")
     return simplifier(text, max_length=100)[0]['generated_text']
+
+    #function that replaces complex jargon in the text with user friendly definitions from my dictionary
 def replace_jargon(text, dictionary):
     words = text.split()
     simplified_words = []
     for word in words:
-      #handle punctuation and case sensitivity
+      #handle punctuation and case sensitivity by removing punctuation and converting to lowercase to improve matching with dictionary keys
       stripped_word=word.strip(",.!?") #this removes punctuation
       lowercase_word=stripped_word.lower()#convert to lowercase to match dictionary input, allows for easy dictionary lookup
       if lowercase_word in dictionary:
@@ -154,25 +156,16 @@ def replace_jargon(text, dictionary):
         word=word.replace(stripped_word,definition)
       simplified_words.append(word)
     return ' '.join(simplified_words)
-    #test text
-def replace_jargon(text, dictionary):
-    words = text.split()
-    simplified_words = []
-    for word in words:
-        # handling punctuation and case sensitivity
-        clean_word = word.strip(",.!?").lower()
-        if clean_word in dictionary:
-            # replace and keep the original punctuation
-            word = dictionary[clean_word] + word[len(clean_word):]
-        simplified_words.append(word)
-    return ' '.join(simplified_words)
+    #test case
 test_text = "In epidemiology, the incidence of the disease was noted to be rising, which was significant as the p-value was below 0.05, according to WHO standards."
 simplified_text = replace_jargon(test_text, public_health_dict)
 simplified_text
-
+#output: In the study of what causes a disease outcome and the population distribution of the outcome, the the number of new cases of a disease of the disease was noted to be rising, which was significant as the statistic that shows if the study results are significant and did not occur due to random chance was below 0.05, according to World health organization standards.
 #debug spacing error 2 hours 
+#Spaces were either ommitted or added incorrectly 
 #Research ideas on how to facilitate greater user interaction, code adding and updating terms, removing terms, getting definition of term to promote user interaction, debugging  
 #3 hours
+#function to add or update term in dictionary 
 def add_or_update_term(term, definition):
     if term in public_health_dict:
         action = "updated"
@@ -200,6 +193,11 @@ def get_definition(term):
 #Examples 
 print(remove_term("Mortality"))
 print(get_definition("Epidemiology"))
+
+#output: Term 'Biostatistics' added successfully.
+#Term 'Epidemiology' added successfully.
+#Term 'Mortality' not found.
+#The science that studies the patterns, causes, and effects of health and disease conditions in defined populations.
 
 #Updating to be even more advanced by implementing tokenizing (split text into words or sentences), POS tagging (part of speech tagging, like noun, verb, adjective, etc.), and stop words removal (the, is, at) that do not contribute much meaning to a sentence 
 #19 hours debugging, coding, and researching NLTK functions 
@@ -238,29 +236,34 @@ def simplify_text_with_nltk(text):
     tagged_words=pos_tag(filtered_words)
 
     #replace complex words based on dictionary 
-   simplified_words=[]
+   simplified_words=[] #initialize empty list to collect words after processing 
     for word, tag in tagged_words:
+    #iterate through each word and its part of speech tag  
       if word in string.punctuation:
+                #Handle punctuation separately to avoid unecessary spaces
                 if simplified_words and not simplified_words[-1].endswith(' '):
                     simplified_words.append(word)
                 else:
                     simplified_words.append(word)
             else:
+             #add a space before the word unless the last character in the list is a punctuation mark.
                 if simplified_words and not simplified_words[-1].endswith((' ', '.', ',', '!', '?', ':', ';')):
                     simplified_words.append(' ')
                 simplified_words.append(public_health_dict.get(word, word))
-                
+                #append definition from dictionary if it exists, or the word itself 
+
+            
     #reconstruct simplified sentence 
     simplified_sentence=''.join(simplified_words)
     simplified_sentences.append(simplified_sentence)
-    
-  #reconstruct simplified text using sentences 
+     #reconstruct final simplified text using each simplified sentence 
   return''.join(simplified_sentences)
 
 # Example usage 
 example_text = "Epidemiology and morbidity are key concepts in public health studies."
 print(simplify_text_with_nltk(example_text))
 
+#Edge Cases
 #alter who to differ between WHO, the World Health Organization, versus the pronoun "who"
 def refine_who(text):
   sentences=sent_tokenize(text)
@@ -339,7 +342,7 @@ def refine_aids(text):
                     new_sentence.append(word)
 
 
-       # Join the words to form the final sentence
+       # join the words to form the final sentence
     refined_sentence = ''.join(new_sentence)
     refined_text.append(refined_sentence)
 
@@ -359,7 +362,7 @@ from transformers import BartForConditionalGeneration, BartTokenizer
 
 def load_model_and_tokenizer(model_name='facebook/bart-large-cnn'):
     """
-    Loads the BART model and tokenizer.
+    loads the BART model and tokenizer.
     """
     tokenizer = BartTokenizer.from_pretrained(model_name)
     model = BartForConditionalGeneration.from_pretrained(model_name)
@@ -367,26 +370,31 @@ def load_model_and_tokenizer(model_name='facebook/bart-large-cnn'):
 
 def replace_terms_with_definitions(text, dictionary):
     """
-    Replaces terms in the text with their definitions from the dictionary.
+    replaces terms in the text with their definitions from the dictionary.
     """
+    #split input into individual words
     words = text.split()
     new_words = []
+    #iterate through each word to replace with definition 
     for word in words:
-        key = word.lower().strip(",.!?")
+        key = word.lower().strip(",.!?") #cleans up word by removing punctuation and making it lowercase
         if key in dictionary:
             new_words.append(dictionary[key] + " (" + word + ")")
         else:
-            new_words.append(word)
-    return ' '.join(new_words)
+            new_words.append(word) #keep original word if not found in dictionary 
+    return ' '.join(new_words) #join new words into one string with spaces
 
 def simplify_text(text, model, tokenizer):
     """
     Simplifies text using the BART model.
     """
-    # Replace complex terms with definitions before simplification
+    # replace complex terms with definitions before simplification
     text_with_definitions = replace_terms_with_definitions(text, public_health_dict)
+    #encode modified text into a compatible input format
     inputs = tokenizer.encode("simplify: " + text_with_definitions, return_tensors="pt", max_length=1024, truncation=True)
+    #generate simplified text 
     summary_ids = model.generate(inputs, max_length=200, min_length=40, length_penalty=2.0, num_beams=4, early_stopping=True)
+    #decode to text and remove special tokens 
     simplified_text = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
     return simplified_text
 
@@ -394,9 +402,12 @@ def main():
     """
     Main function to execute the script.
     """
+    #load model and tokenizer
     model, tokenizer = load_model_and_tokenizer()
+    #provide original text
     original_text = "In the context of an ongoing global health crisis, epidemiological studies consistently demonstrate that the prevalence of co-morbid conditions such as hypertension, diabetes mellitus, and chronic respiratory diseases significantly exacerbate the morbidity and mortality rates associated with the novel coronavirus, thereby underscoring the imperative necessity for targeted public health interventions aimed at these underlying health disparities. Furthermore, the intersectionality of socio-economic factors and access to healthcare services plays a pivotal role in influencing the epidemiological outcomes and necessitates the formulation of multi-faceted public health strategies designed to alleviate the disproportionate impact on marginalized communities."
     print("Original Text:", original_text)
+    #generate and print simplified text 
     simplified_text = simplify_text(original_text, model, tokenizer)
     print("Simplified Text:", simplified_text)
 
