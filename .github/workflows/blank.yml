@@ -124,7 +124,7 @@ public_health_dict = {'nhs': 'National Institutes of Health, a major biomedical 
 'mortality':'death',
 'exacerbate':'worsen',
 'co-morbid':'simultaneously present',
-'epidemiological':'diseases',
+'epidemiological':'relating to diseases',
 'intersectionality':'interconnected nature'}
 
 print(public_health_dict)
