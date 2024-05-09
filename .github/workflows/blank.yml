@@ -235,11 +235,11 @@ def simplify_text_with_nltk(text):
     #pos tagging 
     tagged_words=pos_tag(filtered_words)
 
-    #replace complex words based on dictionary 
+#replace complex words based on dictionary 
     simplified_words=[] #initialize empty list to collect words after processing 
     for word, tag in tagged_words:
     #iterate through each word and its part of speech tag  
-      if word in string.punctuation:
+            if word in string.punctuation:
                 #Handle punctuation separately to avoid unecessary spaces
                 if simplified_words and not simplified_words[-1].endswith(' '):
                     simplified_words.append(word)
